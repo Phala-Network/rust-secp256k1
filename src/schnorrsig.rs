@@ -10,9 +10,9 @@ use rand::{CryptoRng, Rng};
 use super::Error::{InvalidPublicKey, InvalidSecretKey, InvalidSignature};
 use super::{from_hex, Error};
 use core::{fmt, ptr, str};
-use ffi::{self, CPtr};
-use {constants, Secp256k1};
-use {Message, Signing, Verification};
+use crate::ffi::{self, CPtr};
+use crate::{constants, Secp256k1};
+use crate::{Message, Signing, Verification};
 
 /// Represents a Schnorr signature.
 pub struct Signature([u8; constants::SCHNORRSIG_SIGNATURE_SIZE]);
@@ -358,8 +358,8 @@ impl From<ffi::XOnlyPublicKey> for PublicKey {
     }
 }
 
-impl From<::key::PublicKey> for PublicKey {
-    fn from(src: ::key::PublicKey) -> PublicKey {
+impl From<crate::key::PublicKey> for PublicKey {
+    fn from(src: crate::key::PublicKey) -> PublicKey {
         unsafe {
             let mut pk = ffi::XOnlyPublicKey::new();
             assert_eq!(
@@ -766,11 +766,11 @@ mod tests {
 
     #[test]
     fn test_from_key_pubkey() {
-        let kpk1 = ::key::PublicKey::from_str(
+        let kpk1 = crate::key::PublicKey::from_str(
             "02e6642fd69bd211f93f7f1f36ca51a26a5290eb2dd1b0d8279a87bb0d480c8443",
         )
         .unwrap();
-        let kpk2 = ::key::PublicKey::from_str(
+        let kpk2 = crate::key::PublicKey::from_str(
             "0384526253c27c7aef56c7b71a5cd25bebb66dddda437826defc5b2568bde81f07",
         )
         .unwrap();

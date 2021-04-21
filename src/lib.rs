@@ -148,13 +148,13 @@ pub mod schnorrsig;
 #[cfg(feature = "recovery")]
 pub mod recovery;
 
-pub use key::SecretKey;
-pub use key::PublicKey;
-pub use context::*;
+pub use crate::key::SecretKey;
+pub use crate::key::PublicKey;
+pub use crate::context::*;
 use core::marker::PhantomData;
 use core::ops::Deref;
 use core::mem;
-use ffi::{CPtr, types::AlignedType};
+use crate::ffi::{CPtr, types::AlignedType};
 
 #[cfg(feature = "global-context")]
 pub use context::global::SECP256K1;
@@ -855,13 +855,13 @@ mod tests {
     use std::str::FromStr;
     use std::marker::PhantomData;
 
-    use key::{SecretKey, PublicKey};
+    use crate::key::{SecretKey, PublicKey};
     use super::from_hex;
     use super::constants;
     use super::{Secp256k1, Signature, Message};
     use super::Error::{InvalidMessage, IncorrectSignature, InvalidSignature};
-    use ffi::{self, types::AlignedType};
-    use context::*;
+    use crate::ffi::{self, types::AlignedType};
+    use crate::context::*;
 
     #[cfg(target_arch = "wasm32")]
     use wasm_bindgen_test::wasm_bindgen_test as test;
@@ -1129,7 +1129,7 @@ mod tests {
         wild_keys[0][0] = 1;
         wild_msgs[0][0] = 1;
 
-        use constants;
+        use crate::constants;
         wild_keys[1][..].copy_from_slice(&constants::CURVE_ORDER[..]);
         wild_msgs[1][..].copy_from_slice(&constants::CURVE_ORDER[..]);
 

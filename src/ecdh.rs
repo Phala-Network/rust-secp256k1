@@ -19,8 +19,8 @@
 use core::ptr;
 use core::ops::{FnMut, Deref};
 
-use key::{SecretKey, PublicKey};
-use ffi::{self, CPtr};
+use crate::key::{SecretKey, PublicKey};
+use crate::ffi::{self, CPtr};
 use secp256k1_sys::types::{c_int, c_uchar, c_void};
 
 /// A tag used for recovering the public key from a compact signature
@@ -224,7 +224,7 @@ mod tests {
         let x = [5u8; 32];
         let y = [7u8; 32];
         let mut output = [0u8; 64];
-        let res = unsafe { super::c_callback(output.as_mut_ptr(), x.as_ptr(), y.as_ptr(), ::ptr::null_mut()) };
+        let res = unsafe { super::c_callback(output.as_mut_ptr(), x.as_ptr(), y.as_ptr(), crate::ptr::null_mut()) };
         assert_eq!(res, 1);
         let mut new_x = [0u8; 32];
         let mut new_y = [0u8; 32];

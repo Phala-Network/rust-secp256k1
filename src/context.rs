@@ -1,9 +1,9 @@
 use core::marker::PhantomData;
 use core::mem::{self, ManuallyDrop};
-use ffi::{self, CPtr, types::AlignedType};
-use ffi::types::{c_uint, c_void};
-use Error;
-use Secp256k1;
+use crate::ffi::{self, CPtr, types::AlignedType};
+use crate::ffi::types::{c_uint, c_void};
+use crate::Error;
+use crate::Secp256k1;
 
 #[cfg(feature = "std")]
 pub use self::std_only::*;

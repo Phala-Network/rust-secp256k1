@@ -21,10 +21,10 @@ use core::{fmt, str};
 
 use super::{from_hex, Secp256k1};
 use super::Error::{self, InvalidPublicKey, InvalidSecretKey};
-use Signing;
-use Verification;
-use constants;
-use ffi::{self, CPtr};
+use crate::Signing;
+use crate::Verification;
+use crate::constants;
+use crate::ffi::{self, CPtr};
 
 /// Secret 256-bit key used as `x` in an ECDSA signature
 pub struct SecretKey([u8; constants::SECRET_KEY_SIZE]);
@@ -418,8 +418,8 @@ impl Ord for PublicKey {
 
 #[cfg(test)]
 mod test {
-    use Secp256k1;
-    use from_hex;
+    use crate::Secp256k1;
+    use crate::from_hex;
     use super::super::Error::{InvalidPublicKey, InvalidSecretKey};
     use super::{PublicKey, SecretKey};
     use super::super::constants;

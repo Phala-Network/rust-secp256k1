@@ -3,6 +3,7 @@ name = "secp256k1"
 version = "0.20.1"
 authors = [ "Dawid Ciężarkiewicz <dpc@ucore.info>",
             "Andrew Poelstra <apoelstra@wpsoftware.net>" ]
+edition = "2018"
 license = "CC0-1.0"
 homepage = "https://github.com/rust-bitcoin/rust-secp256k1/"
 repository = "https://github.com/rust-bitcoin/rust-secp256k1/"

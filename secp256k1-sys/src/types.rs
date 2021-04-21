@@ -51,7 +51,7 @@ mod tests {
     use std::any::TypeId;
     use std::mem;
     use std::os::raw;
-    use {types, AlignedType};
+    use crate::{types, AlignedType};
 
     #[test]
     fn verify_types() {

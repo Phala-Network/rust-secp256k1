@@ -4,6 +4,7 @@ version = "0.4.0"
 authors = [ "Dawid Ciężarkiewicz <dpc@ucore.info>",
             "Andrew Poelstra <apoelstra@wpsoftware.net>",
             "Steven Roose <steven@stevenroose.org>" ]
+edition = "2018"
 license = "CC0-1.0"
 homepage = "https://github.com/rust-bitcoin/rust-secp256k1/"
 repository = "https://github.com/rust-bitcoin/rust-secp256k1/"
@@ -29,4 +30,3 @@ default = ["std"]
 recovery = []
 lowmemory = []
 std = []
-

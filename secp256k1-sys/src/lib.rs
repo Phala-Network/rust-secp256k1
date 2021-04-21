@@ -37,7 +37,7 @@ pub mod types;
 pub mod recovery;
 
 use core::{hash, slice, ptr};
-use types::*;
+use crate::types::*;
 
 /// Flag for context to enable no precomputation
 pub const SECP256K1_START_NONE: c_uint = 1;
