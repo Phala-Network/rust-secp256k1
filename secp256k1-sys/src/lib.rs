@@ -22,9 +22,20 @@
 #![deny(non_snake_case)]
 #![deny(unused_mut)]
 
-#![cfg_attr(all(not(test), not(feature = "std")), no_std)]
-#[cfg(any(test, feature = "std"))]
-extern crate core;
+#![cfg_attr(all(feature = "mesalock_sgx", not(target_env = "sgx")), no_std)]
+#![cfg_attr(all(target_env = "sgx", target_vendor = "mesalock"), feature(rustc_private))]
+
+#[cfg(all(feature = "mesalock_sgx", not(target_env = "sgx")))]
+#[macro_use]
+extern crate sgx_tstd as core;
+
+// #![cfg_attr(all(not(test), not(feature = "std")), no_std)]
+// #[cfg(any(test, feature = "std"))]
+// extern crate core;
+
+#[cfg(all(feature = "mesalock_sgx", not(target_env = "sgx")))]
+#[macro_use]
+extern crate sgx_tstd as std;
 
 #[cfg(fuzzing)]
 const THIS_UNUSED_CONSTANT_IS_YOUR_WARNING_THAT_ALL_THE_CRYPTO_IN_THIS_LIB_IS_DISABLED_FOR_FUZZING: usize = 0;
@@ -772,4 +783,3 @@ mod tests {
         assert_eq!(orig.len(), unsafe {strlen(test.as_ptr())});
     }
 }
-

@@ -19,41 +19,47 @@ features = [ "rand", "rand-std", "serde", "recovery" ]
 
 [features]
 unstable = ["recovery", "rand-std"]
-default = ["std"]
-std = ["secp256k1-sys/std"]
+default = [ "std", "mesalock_sgx" ]
+std = [ "secp256k1-sys/std", "mesalock_sgx" ]
 rand-std = ["rand/std"]
 recovery = ["secp256k1-sys/recovery"]
 lowmemory = ["secp256k1-sys/lowmemory"]
 global-context = ["std", "rand-std"]
+mesalock_sgx = [ "std", "sgx_tstd" ]
+
 
 [dependencies]
 secp256k1-sys = { version = "0.4.0", default-features = false, path = "./secp256k1-sys" }
-bitcoin_hashes = { version = "0.9", optional = true }
-rand = { version = "0.6", default-features = false, optional = true }
-serde = { version = "1.0", default-features = false, optional = true }
+# bitcoin_hashes = { version = "0.9", optional = true }
+bitcoin_hashes = { branch = "0.9.1-sgx", git = "https://github.com/Phala-Network/bitcoin_hashes", optional = true }
+# rand = { version = "0.6", default-features = false, optional = true }
+rand = { git = "https://github.com/mesalock-linux/rand-sgx", tag = "v0.7.3_sgx1.1.3", default-features = false, optional = true }
+# serde = { version = "1.0", default-features = false, optional = true }
+serde = { git = "https://github.com/mesalock-linux/serde-sgx.git", default-features = false, optional = true }
+sgx_tstd = { rev = "v1.1.3", git = "https://github.com/apache/teaclave-sgx-sdk.git", optional = true }
 
 
 [dev-dependencies]
-rand = "0.6"
-rand_core = "0.4"
-serde_test = "1.0"
-bitcoin_hashes = "0.9"
+# rand = "0.6"
+# rand_core = "0.4"
+# serde_test = "1.0"
+# bitcoin_hashes = "0.9"
 
-[target.wasm32-unknown-unknown.dev-dependencies]
-wasm-bindgen-test = "0.3"
-rand = { version = "0.6", features = ["wasm-bindgen"] }
+# [target.wasm32-unknown-unknown.dev-dependencies]
+# wasm-bindgen-test = "0.3"
+# rand = { version = "0.6", features = ["wasm-bindgen"] }
 
 
-[[example]]
-name = "sign_verify_recovery"
-required-features = ["recovery"]
+# [[example]]
+# name = "sign_verify_recovery"
+# required-features = ["recovery"]
 
-[[example]]
-name = "sign_verify"
+# [[example]]
+# name = "sign_verify"
 
-[[example]]
-name = "generate_keys"
-required-features = ["rand"]
+# [[example]]
+# name = "generate_keys"
+# required-features = ["rand"]
 
 [workspace]
 members = ["secp256k1-sys"]
